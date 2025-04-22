@@ -1,3 +1,125 @@
+# 📊 Compound Interest Calculator - Learning Project
+
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![Tkinter](https://img.shields.io/badge/GUI-Tkinter-green.svg)
+![Matplotlib](https://img.shields.io/badge/Graphs-Matplotlib-orange.svg)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+
+This project is a compound interest calculator developed for educational purposes, showcasing best practices for organizing Python code in professional projects.
+
+## 🎯 Main Objective
+
+Teach how to organize a Python project in a professional structure following the MVC (Model-View-Controller) pattern:
+
+```mermaid
+graph TD
+    A[View] -->|Sends data| B[Controller]
+    B -->|Validation| C[Model]
+    C -->|Returns results| B
+    B -->|Updates interface| A
+    A -->|Displays graph| D[Matplotlib]
+```
+
+## ✨ Key Features
+
+- 💰 Accurate compound interest calculations
+- 📈 Interactive graphical visualization
+- 🎨 Intuitive interface with Tkinter
+- ✅ Robust input validation
+- 💵 Automatic currency formatting
+- 🖥️ Responsive design for various screen sizes
+
+## 🛠️ How to Run
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Monokatarina/compound-interest.git
+   cd compound-interest
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Run the program**:
+   ```bash
+   python main.py
+   ```
+
+## 🧠 Key Concepts Learned
+
+### Professional Organization
+```mermaid
+pie
+    title Project Structure
+    "models/" : 25
+    "views/" : 30
+    "controllers/" : 25
+    "utils/" : 20
+```
+
+### Technologies Used
+| Technology | Purpose |
+|------------|---------|
+| Python     | Core logic |
+| Tkinter    | Graphical interface |
+| Matplotlib | Data visualization |
+| Mermaid    | Diagrams in README |
+
+## 📚 Detailed Structure
+
+```mermaid
+flowchart TB
+    subgraph "Project Structure"
+        A[main.py] --> B[controllers/calculator.py]
+        A --> C[views/gui.py]
+        A --> D[models/calculations.py]
+        A --> E[utils/formatters.py]
+    end
+```
+
+**Complete Legend**:
+- `models/`: Contains mathematical formulas
+- `views/`: User interface and graphs
+- `controllers/`: Validation and flow control
+- `utils/`: Auxiliary functions
+
+## 🤝 How to Contribute
+
+1. Fork the project
+2. Create a branch for your feature (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+Made with ❤️ by [Monokatarina] - Transforming lines of code into knowledge! 🚀
+
+[![GitHub stars](https://img.shields.io/github/stars/Monokatarina/compound-interest?style=social)](https://github.com/Monokatarina/compound-interest)
+[![GitHub forks](https://img.shields.io/github/forks/Monokatarina/compound-interest?style=social)](https://github.com/Monokatarina/compound-interest/network)
+
+## 🏆 Usage Example
+
+```python
+# Simplified example of the main logic
+from models.calculations import calculate_compound_interest
+
+result = calculate_compound_interest(
+    principal=1000,
+    interest_rate=8,  # 8% per year
+    time=5            # 5 years
+)
+print(f"Final amount: ${result:,.2f}")
+```
+
+---
+
 # 📊 Calculadora de Juros Compostos - Projeto de Aprendizado
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
@@ -5,7 +127,7 @@
 ![Matplotlib](https://img.shields.io/badge/Graphs-Matplotlib-orange.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-Este projeto é uma calculadora de juros compostos desenvolvida para fins educacionais, demonstrando boas práticas de organização de código em Python para projetos profissionais.
+Este projeto é uma calculadora de juros compostos desenvolvida para fins educacionais, demonstrando boas práticas de organização de código em projetos profissionais.
 
 ## 🎯 Objetivo Principal
 
@@ -47,7 +169,6 @@ graph TD
    python main.py
    ```
 
-
 ## 🧠 Conceitos Aprendidos
 
 ### Organização Profissional
@@ -63,10 +184,10 @@ pie
 ### Tecnologias Utilizadas
 | Tecnologia | Finalidade |
 |------------|------------|
-| Python | Lógica principal |
-| Tkinter | Interface gráfica |
+| Python     | Lógica principal |
+| Tkinter    | Interface gráfica |
 | Matplotlib | Visualização de dados |
-| Mermaid | Diagramas no README |
+| Mermaid    | Diagramas no README |
 
 ## 📚 Estrutura Detalhada
 
@@ -80,7 +201,7 @@ flowchart TB
     end
 ```
 
-**Legenda completa**:
+**Legenda Completa**:
 - `models/`: Contém as fórmulas matemáticas
 - `views/`: Interface do usuário e gráficos
 - `controllers/`: Validação e controle de fluxo
