@@ -47,10 +47,6 @@ graph TD
    python main.py
    ```
 
-## 🖼️ Capturas de Tela
-
-![Interface Principal](screenshot.png)
-*Interface intuitiva com gráfico integrado*
 
 ## 🧠 Conceitos Aprendidos
 
