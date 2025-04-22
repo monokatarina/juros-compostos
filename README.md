@@ -1,92 +1,124 @@
-📊 Calculadora de Juros Compostos - Projeto de Aprendizado
-Python
-Tkinter
-Matplotlib
+# 📊 Calculadora de Juros Compostos - Projeto de Aprendizado
+
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![Tkinter](https://img.shields.io/badge/GUI-Tkinter-green.svg)
+![Matplotlib](https://img.shields.io/badge/Graphs-Matplotlib-orange.svg)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 Este projeto é uma calculadora de juros compostos desenvolvida para fins educacionais, demonstrando boas práticas de organização de código em Python para projetos profissionais.
 
-🎯 Objetivo Principal
-Ensinar como organizar um projeto Python em uma estrutura profissional com:
+## 🎯 Objetivo Principal
 
-pasta_raiz/
-├── controllers/    # Lógica de controle
-├── models/         # Regras de negócio
-├── views/          # Interface do usuário
-└── utils/          # Ferramentas auxiliares
-✨ Funcionalidades
-💰 Cálculo de juros compostos
+Ensinar como organizar um projeto Python em uma estrutura profissional seguindo o padrão MVC (Model-View-Controller):
 
-📈 Visualização gráfica da evolução do investimento
-
-🎨 Interface intuitiva e bonita
-
-✅ Validação de entradas
-
-💵 Formatação monetária automática
-
-🛠️ Como Executar
-Clone o repositório
-
-bash
-git clone https://github.com/seu-usuario/juros-compostos.git
-Instale as dependências
-
-bash
-pip install -r requirements.txt
-Execute o programa
-
-bash
-python main.py
-🖼️ Screenshots
-Interface da Calculadora
-
-🧠 O Que Você Vai Aprender
-Organização de Projetos Python
-
-Separação lógica em MVC (Model-View-Controller)
-
-Estrutura de pastas profissional
-
-Boas Práticas
-
-Separação de responsabilidades
-
-Código modular
-
-Documentação clara
-
-Tecnologias Utilizadas
-
+```mermaid
 graph TD
+    A[View] -->|Envia dados| B[Controller]
+    B -->|Validação| C[Model]
+    C -->|Retorna resultados| B
+    B -->|Atualiza interface| A
+    A -->|Exibe gráfico| D[Matplotlib]
+```
 
-  A[Tkinter] --> B[Interface Gráfica]
-  C[Matplotlib] --> D[Gráficos]
-  E[Python] --> F[Lógica de Negócio]
-  B --> G[Calculadora]
-  D --> G
-  F --> G
+## ✨ Funcionalidades Principais
 
-📚 Estrutura do Código Explicada
-Pasta	Finalidade	Exemplo de Conteúdo
-models/	Regras de negócio e cálculos	Fórmulas de juros compostos
-views/	Interface do usuário	Telas, botões, gráficos
-controllers/	Conecta view e model	Validações, preparação de dados
-utils/	Ferramentas auxiliares	Formatação, tratamento de erros
-🤝 Como Contribuir
-Faça um fork do projeto
+- 💰 Cálculo preciso de juros compostos
+- 📈 Visualização gráfica interativa
+- 🎨 Interface intuitiva com Tkinter
+- ✅ Validação robusta de entradas
+- 💵 Formatação monetária automática
+- 🖥️ Responsividade para diferentes tamanhos de tela
 
-Crie uma branch (git checkout -b feature/nova-funcionalidade)
+## 🛠️ Como Executar
 
-Commit suas mudanças (git commit -m 'Adiciona nova funcionalidade')
+1. **Clone o repositório**:
+   ```bash
+   git clone https://github.com/Monokatarina/juros-compostos.git
+   cd juros-compostos
+   ```
 
-Push para a branch (git push origin feature/nova-funcionalidade)
+2. **Instale as dependências**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Abra um Pull Request
+3. **Execute o programa**:
+   ```bash
+   python main.py
+   ```
 
-📄 Licença
-Este projeto está licenciado sob a licença MIT - veja o arquivo LICENSE para detalhes.
+## 🖼️ Capturas de Tela
 
-Feito com ❤️ por [Monokatarina] - Aprendendo e compartilhando conhecimento! 🚀
+![Interface Principal](screenshot.png)
+*Interface intuitiva com gráfico integrado*
 
-GitHub stars 
-GitHub forks
+## 🧠 Conceitos Aprendidos
+
+### Organização Profissional
+```mermaid
+pie
+    title Estrutura do Projeto
+    "models/" : 25
+    "views/" : 30
+    "controllers/" : 25
+    "utils/" : 20
+```
+
+### Tecnologias Utilizadas
+| Tecnologia | Finalidade |
+|------------|------------|
+| Python | Lógica principal |
+| Tkinter | Interface gráfica |
+| Matplotlib | Visualização de dados |
+| Mermaid | Diagramas no README |
+
+## 📚 Estrutura Detalhada
+
+```mermaid
+flowchart TB
+    subgraph "Estrutura do Projeto"
+        A[main.py] --> B[controllers/calculator.py]
+        A --> C[views/gui.py]
+        A --> D[models/calculations.py]
+        A --> E[utils/formatters.py]
+    end
+```
+
+**Legenda completa**:
+- `models/`: Contém as fórmulas matemáticas
+- `views/`: Interface do usuário e gráficos
+- `controllers/`: Validação e controle de fluxo
+- `utils/`: Funções auxiliares
+
+## 🤝 Como Contribuir
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/incrivel`)
+3. Commit suas mudanças (`git commit -m 'Adiciona feature incrível'`)
+4. Push para a branch (`git push origin feature/incrivel`)
+5. Abra um Pull Request
+
+## 📄 Licença
+
+Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
+
+---
+
+Feito com ❤️ por [Monokatarina] - Transformando linhas de código em conhecimento! 🚀
+
+[![GitHub stars](https://img.shields.io/github/stars/Monokatarina/juros-compostos?style=social)](https://github.com/Monokatarina/juros-compostos)
+[![GitHub forks](https://img.shields.io/github/forks/Monokatarina/juros-compostos?style=social)](https://github.com/Monokatarina/juros-compostos/network)
+
+## 🏆 Exemplo de Uso
+
+```python
+# Exemplo simplificado da lógica principal
+from models.calculations import calcular_juros_compostos
+
+resultado = calcular_juros_compostos(
+    capital_inicial=1000,
+    taxa_juros=8,  # 8% ao ano
+    tempo=5        # 5 anos
+)
+print(f"Montante final: R${resultado:,.2f}")
+```
