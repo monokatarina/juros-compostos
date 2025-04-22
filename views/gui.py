@@ -15,8 +15,8 @@ class JurosCompostosApp:
         
     def setup_ui(self):
         self.root.title("💰 Calculadora de Juros Compostos Premium")
-        self.root.geometry("1000x700")
-        self.root.minsize(800, 600)
+        self.root.geometry("1200x800")
+        self.root.minsize(400, 300) # Tamanho mínimo da janela
         
         # Frames principais
         self.create_frames()
@@ -25,12 +25,12 @@ class JurosCompostosApp:
         
     def create_frames(self):
         # Frame de cabeçalho
-        self.header_frame = ttk.Frame(self.root, padding=(15, 10))
+        self.header_frame = ttk.Frame(self.root, padding=(15, 10)) 
         self.header_frame.pack(fill=tk.X)
         
         # Frame de entrada
         self.input_frame = ttk.LabelFrame(self.root, text="📊 Parâmetros do Investimento", padding=20)
-        self.input_frame.pack(fill=tk.X, padx=20, pady=(0, 10))
+        self.input_frame.pack(fill=tk.X, padx=20, pady=(0, 10)) 
         
         # Frame do gráfico
         self.graph_frame = ttk.Frame(self.root)
@@ -52,35 +52,35 @@ class JurosCompostosApp:
         self.tipo_taxa = tk.StringVar(value="anual")
         
         # Grid configuration
-        for i in range(4):
+        for i in range(2): # Configurar colunas do grid
             self.input_frame.columnconfigure(i, weight=1)
         
         # Capital Inicial
         ttk.Label(self.input_frame, text="Capital Inicial (R$):", style='Header.TLabel').grid(row=0, column=0, sticky=tk.W, pady=5)
         self.capital_inicial = ttk.Entry(self.input_frame, font=('Helvetica', 11))
-        self.capital_inicial.grid(row=1, column=0, sticky=tk.EW, padx=10, pady=(0, 10))
+        self.capital_inicial.grid(row=1, column=0, sticky=tk.EW, padx=5, pady=(0, 10))
         
         # Tipo de Taxa
         ttk.Label(self.input_frame, text="Tipo de Taxa:", style='Header.TLabel').grid(row=0, column=1, sticky=tk.W, pady=5)
         taxa_frame = ttk.Frame(self.input_frame)
-        taxa_frame.grid(row=1, column=1, sticky=tk.W, padx=10, pady=(0, 10))
+        taxa_frame.grid(row=1, column=1, sticky=tk.W, padx=5, pady=(0, 10)) # Configurar frame para os botões de taxa
         ttk.Radiobutton(taxa_frame, text="Anual", variable=self.tipo_taxa, value="anual").pack(side=tk.LEFT, padx=5)
         ttk.Radiobutton(taxa_frame, text="Mensal", variable=self.tipo_taxa, value="mensal").pack(side=tk.LEFT)
         
         # Taxa de Juros
         ttk.Label(self.input_frame, text="Taxa de Juros (%):", style='Header.TLabel').grid(row=0, column=2, sticky=tk.W, pady=5)
         self.taxa_juros = ttk.Entry(self.input_frame, font=('Helvetica', 11))
-        self.taxa_juros.grid(row=1, column=2, sticky=tk.EW, padx=10, pady=(0, 10))
+        self.taxa_juros.grid(row=1, column=2, sticky=tk.EW, padx=5, pady=(0, 10))
         
         # Tempo
         ttk.Label(self.input_frame, text="Tempo (anos):", style='Header.TLabel').grid(row=2, column=0, sticky=tk.W, pady=5)
         self.tempo = ttk.Entry(self.input_frame, font=('Helvetica', 11))
-        self.tempo.grid(row=3, column=0, sticky=tk.EW, padx=10, pady=(0, 10))
+        self.tempo.grid(row=3, column=0, sticky=tk.EW, padx=5, pady=(0, 10))
         
         # Investimento Mensal
         ttk.Label(self.input_frame, text="Investimento Mensal (R$):", style='Header.TLabel').grid(row=2, column=1, sticky=tk.W, pady=5)
         self.investimento_mensal = ttk.Entry(self.input_frame, font=('Helvetica', 11))
-        self.investimento_mensal.grid(row=3, column=1, sticky=tk.EW, padx=10, pady=(0, 10))
+        self.investimento_mensal.grid(row=3, column=1, sticky=tk.EW, padx=5, pady=(0, 10))
         
         # Botão de cálculo
         self.calcular_btn = ttk.Button(
@@ -152,22 +152,31 @@ class JurosCompostosApp:
             widget.destroy()
         
         # Criar figura
-        fig, ax = plt.subplots(figsize=(8, 4))
+        fig, ax = plt.subplots(figsize=(4, 2))
+        fig.patch.set_facecolor('#ecf0f1')
         
         # Plotar dados
+        anos = resultados['anos']
+        montantes = resultados['montantes']
+        investimentos_totais = resultados['investimentos_totais']
+        
         ax.plot(
-            resultados['anos'], 
-            resultados['montantes'], 
+            anos, 
+            montantes, 
             label='Montante', 
             color='#27ae60'
         )
         ax.plot(
-            resultados['anos'], 
-            resultados['investimentos_totais'], 
+            anos, 
+            investimentos_totais, 
             label='Investido', 
             color='#3498db',
             linestyle='--'
         )
+        
+        # Adicionar pontos no gráfico
+        ax.scatter(anos, montantes, color='#27ae60', s=50, label='Pontos Montante')
+        ax.scatter(anos, investimentos_totais, color='#3498db', s=50, label='Pontos Investido')
         
         # Configurar gráfico
         ax.set_title("Evolução do Investimento")
@@ -180,6 +189,35 @@ class JurosCompostosApp:
         ax.yaxis.set_major_formatter(
             plt.FuncFormatter(lambda x, _: f"R${x/1000:,.0f}k" if x >= 1000 else f"R${x:,.0f}")
         )
+        
+        # Adicionar interatividade para exibir valores ao passar o mouse
+        annot = ax.annotate("", xy=(0, 0), xytext=(15, 15), textcoords="offset points",
+                            bbox=dict(boxstyle="round", fc="w"),
+                            arrowprops=dict(arrowstyle="->"))
+        annot.set_visible(False)
+
+        def update_annot(ind, scatter, label):
+            x, y = scatter.get_offsets()[ind["ind"][0]]
+            annot.xy = (x, y)
+            text = f"{label}\nAno: {x}\nValor: R${y:,.2f}"
+            annot.set_text(text)
+            annot.get_bbox_patch().set_facecolor('#f9e79f')
+            annot.get_bbox_patch().set_alpha(0.8)
+
+        def on_hover(event):
+            visible = annot.get_visible()
+            for scatter, label in [(ax.collections[0], "Montante"), (ax.collections[1], "Investido")]:
+                cont, ind = scatter.contains(event)
+                if cont:
+                    update_annot(ind, scatter, label)
+                    annot.set_visible(True)
+                    fig.canvas.draw_idle()
+                    return
+            if visible:
+                annot.set_visible(False)
+                fig.canvas.draw_idle()
+
+        fig.canvas.mpl_connect("motion_notify_event", on_hover)
         
         # Exibir no tkinter
         canvas = FigureCanvasTkAgg(fig, master=self.graph_frame)
