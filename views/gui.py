@@ -25,11 +25,11 @@ class JurosCompostosApp:
         
     def create_frames(self):
         # Frame de cabeçalho
-        self.header_frame = ttk.Frame(self.root, padding=(15, 10)) 
+        self.header_frame = ttk.Frame(self.root, padding=(10, 5)) 
         self.header_frame.pack(fill=tk.X)
         
         # Frame de entrada
-        self.input_frame = ttk.LabelFrame(self.root, text="📊 Parâmetros do Investimento", padding=20)
+        self.input_frame = ttk.LabelFrame(self.root, text="📊 Parâmetros do Investimento", padding=10)
         self.input_frame.pack(fill=tk.X, padx=20, pady=(0, 10)) 
         
         # Frame do gráfico
@@ -37,7 +37,7 @@ class JurosCompostosApp:
         self.graph_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
         
         # Frame de resultados
-        self.result_frame = ttk.LabelFrame(self.root, text="📈 Resultados Finais", padding=20)
+        self.result_frame = ttk.LabelFrame(self.root, text="📈 Resultados Finais", padding=10)
         self.result_frame.pack(fill=tk.X, padx=20, pady=(0, 20))
         
         # Cabeçalho
@@ -152,8 +152,8 @@ class JurosCompostosApp:
             widget.destroy()
         
         # Criar figura
-        fig, ax = plt.subplots(figsize=(4, 2))
-        fig.patch.set_facecolor('#ecf0f1')
+        fig, ax = plt.subplots(figsize=(6, 4))  # Aumentar o tamanho do gráfico
+        fig.patch.set_facecolor('#f5f5f5')  # Fundo mais claro para contraste
         
         # Plotar dados
         anos = resultados['anos']
@@ -163,63 +163,44 @@ class JurosCompostosApp:
         ax.plot(
             anos, 
             montantes, 
-            label='Montante', 
-            color='#27ae60'
+            label='Montante Acumulado', 
+            color='#2ecc71', 
+            linewidth=2
         )
         ax.plot(
             anos, 
             investimentos_totais, 
-            label='Investido', 
-            color='#3498db',
-            linestyle='--'
+            label='Total Investido', 
+            color='#3498db', 
+            linestyle='--', 
+            linewidth=2
         )
-        
         # Adicionar pontos no gráfico
-        ax.scatter(anos, montantes, color='#27ae60', s=50, label='Pontos Montante')
-        ax.scatter(anos, investimentos_totais, color='#3498db', s=50, label='Pontos Investido')
+        ax.scatter(anos, montantes, color='#27ae60', s=60, label='Pontos Montante', edgecolors='black')
+        ax.scatter(anos, investimentos_totais, color='#2980b9', s=60, label='Pontos Investido', edgecolors='black')
+        
+        # Adicionar rótulos nos pontos
+        for x, y in zip(anos, montantes):
+            ax.text(x, y, f"R${y:,.2f}", fontsize=10, fontweight='bold', color='#2c3e50', ha='center', va='bottom')
+        for x, y in zip(anos, investimentos_totais):
+            ax.text(x, y, f"R${y:,.2f}", fontsize=10, fontweight='bold', color='#2c3e50', ha='center', va='top')
         
         # Configurar gráfico
-        ax.set_title("Evolução do Investimento")
-        ax.set_xlabel("Anos")
-        ax.set_ylabel("Valor (R$)")
-        ax.legend()
-        ax.grid(True)
+        ax.set_title("Evolução do Investimento ao Longo do Tempo", fontsize=10, color='#34495e')
+        ax.set_xlabel("Anos", fontsize=10, color='#34495e')
+        ax.set_ylabel("Valor (R$)", fontsize=10, color='#34495e')
+        ax.legend(fontsize=10, loc='upper left', frameon=True, facecolor='white', edgecolor='gray')
+        ax.grid(True, linestyle='--', alpha=0.6)
         
         # Formatar eixo Y como moeda
         ax.yaxis.set_major_formatter(
             plt.FuncFormatter(lambda x, _: f"R${x/1000:,.0f}k" if x >= 1000 else f"R${x:,.0f}")
         )
         
-        # Adicionar interatividade para exibir valores ao passar o mouse
-        annot = ax.annotate("", xy=(0, 0), xytext=(15, 15), textcoords="offset points",
-                            bbox=dict(boxstyle="round", fc="w"),
-                            arrowprops=dict(arrowstyle="->"))
-        annot.set_visible(False)
-
-        def update_annot(ind, scatter, label):
-            x, y = scatter.get_offsets()[ind["ind"][0]]
-            annot.xy = (x, y)
-            text = f"{label}\nAno: {x}\nValor: R${y:,.2f}"
-            annot.set_text(text)
-            annot.get_bbox_patch().set_facecolor('#f9e79f')
-            annot.get_bbox_patch().set_alpha(0.8)
-
-        def on_hover(event):
-            visible = annot.get_visible()
-            for scatter, label in [(ax.collections[0], "Montante"), (ax.collections[1], "Investido")]:
-                cont, ind = scatter.contains(event)
-                if cont:
-                    update_annot(ind, scatter, label)
-                    annot.set_visible(True)
-                    fig.canvas.draw_idle()
-                    return
-            if visible:
-                annot.set_visible(False)
-                fig.canvas.draw_idle()
-
-        fig.canvas.mpl_connect("motion_notify_event", on_hover)
-        
         # Exibir no tkinter
         canvas = FigureCanvasTkAgg(fig, master=self.graph_frame)
         canvas.draw()
         canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
+        self.graph_frame.update_idletasks()
+        self.graph_frame.pack_propagate(False)  # Manter o tamanho do frame do gráfico fixo
+        self.graph_frame.config(width=800, height=200)  # Definir tamanho fixo do frame do gráfico
