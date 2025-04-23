@@ -29,8 +29,8 @@ class JurosCompostosApp:
         
     def setup_ui(self):
         self.root.title("🚀 Calculadora de Juros Compostos | WealthTech")
-        self.root.geometry("1280x720")
-        self.root.minsize(800, 600)
+        self.root.geometry("800x600") # Ajuste o tamanho inicial conforme necessário
+        self.root.minsize(400, 300) # Ajuste o tamanho mínimo conforme necessário
         self.root.configure(bg=COLORS["background"])
         
         # Crie um canvas e uma scrollbar vertical
@@ -68,12 +68,12 @@ class JurosCompostosApp:
         # Título moderno
         ttk.Label(self.header_frame, 
                  text="CALCULADORA DE JUROS COMPOSTOS", 
-                 font=('Segoe UI', 18, 'bold'),
+                 font=('Segoe UI', 12, 'bold'),
                  foreground=COLORS["primary"],
-                 background=COLORS["background"]).pack(pady=5)
+                 background=COLORS["background"]).pack(pady=5) 
         
         ttk.Label(self.header_frame, 
-                 text="Simule seus investimentos com tecnologia avançada", 
+                 text="Simule seus investimentos", 
                  font=('Segoe UI', 10),
                  foreground=COLORS["secondary"],
                  background=COLORS["background"]).pack()
