@@ -19,6 +19,10 @@ graph TD
     B -->|Updates interface| A
     A -->|Displays graph| D[Matplotlib]
 ```
+## 📷 Prints
+
+![prints](print/Capturar.PNG)
+![prints](print/Capturar2.PNG)
 
 ## ✨ Key Features
 
