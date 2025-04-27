@@ -126,10 +126,8 @@ print(f"Final amount: ${result:,.2f}")
 
 # 📊 Calculadora de Juros Compostos - Projeto de Aprendizado
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
-![Tkinter](https://img.shields.io/badge/GUI-Tkinter-green.svg)
-![Matplotlib](https://img.shields.io/badge/Graphs-Matplotlib-orange.svg)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+[![GitHub stars](https://img.shields.io/github/stars/Monokatarina/juros-compostos?style=social)](https://github.com/Monokatarina/juros-compostos)
+[![GitHub forks](https://img.shields.io/github/forks/Monokatarina/juros-compostos?style=social)](https://github.com/Monokatarina/juros-compostos/network)
 
 Este projeto é uma calculadora de juros compostos desenvolvida para fins educacionais, demonstrando boas práticas de organização de código em projetos profissionais.
 
